@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}register user{% endblock %}
+
+{% block content %}
+<div class="row text-center vertical-middle-sm">
+
+	<form class="form-horizontal" action="{% url 'account:user_register' %}" method="post">{% csrf_token %}
+
+                {{ form.as_p }}
+       	        <input type="submit" value="Login">
+	</form>
+</div>
+{% endblock %}
+
+

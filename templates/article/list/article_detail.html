@@ -1,0 +1,73 @@
+{% extends "article/base.html" %}
+{% load staticfiles %}
+{%block title%}Article list{% endblock %}
+
+{% block content %}
+
+<div>
+	<header>
+		<h1>{{article.title}}</h1>
+		<p><a href="{% url 'article:author_articles' article.author.username %}">{{article.author.username}}</a></p>
+    </header>
+
+    <link rel="stylesheet" href="{% static 'editor/css/editormd.preview.css' %}" >
+
+    <div id='editormd-view'>
+	<textarea id="append-test" style="display:none;">
+{{article.body}}
+	</textarea>
+</div>
+<hr>
+<div>
+	<h3><span class="glyphicon glyphicon-bullhorn"></span>  The article has {{ article.comments.count }} comments</h3>
+	{% for comment in article.comments.all %}
+	<div>
+		<p><strong>{{ comment.commentator }}</strong> said:</p>
+		<p style="margin-left:40px;">{{ comment.body }}</p>
+	</div>
+	{% empty %}
+	<p>No comment</p>
+	{% endfor %}
+
+	<h3><span class="glyphicon glyphico-send"></span>Write the comment</h3>
+	<form action="." method="post" class="form-horizontal" role="form">{% csrf_token %}
+	<div class="form-group">
+		<label for="inputEmail3" class="col-sm-2 control-label">Comment</label>
+		<div class="col-sm-10">
+			{{ comment_form.body }}
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<p><input type="submit" name="" value="Submit" class="btn btn-primary"></p>
+		</div>
+	</div>
+	</form>
+</div>
+
+
+
+<script type="text/javascript" src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<!--<script src='{% static "js/jquery.js" %}'></script>-->
+<script src='{% static "editor/lib/marked.min.js" %}'></script>
+<script src='{% static "editor/lib/prettify.min.js" %}'></script>
+<script src='{% static "editor/lib/raphael.min.js "%}'></script>
+<script src='{% static "editor/lib/underscore.min.js" %}'></script>
+<script src='{% static "editor/lib/sequence-diagram.min.js" %}'></script>
+<script src='{% static "editor/lib/flowchart.min.js "%}'></script>
+<script src='{% static "editor/lib/jquery.flowchart.min.js" %}'></script>
+<script src='{% static "editor/editormd.js" %}'></script>
+
+<script type="text/javascript">
+$(function(){
+	editormd.markdownToHTML("editormd-view",{
+		htmlDecode:"style,script,iframe",
+		emoji:true,
+		taskList:true,
+		tex:true,
+		flowChart:true,
+		sequenceDiagram:true,
+	});
+});
+</script>
+{% endblock %}

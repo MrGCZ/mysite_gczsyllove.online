@@ -1,0 +1,20 @@
+{% load staticfiles %}
+<div class="container">
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="col-md-2">
+                <div class="navbar-header">
+			<a class='navbar-brand'><img width="150px" src="{% static 'images/logo_blue.png' %}"></a>
+		</div>
+    </div>
+		<div class="col-md-10">
+		    <ul class="nav nav-pills">
+			    <li><a href="{% url 'blog:blog_title' %}">Homepage</a></li>
+			    <li><a href="{% url 'account:user_logout' %}">Logout</a></li>
+
+		    </ul>
+                    <ul class="nav navbar-right" style="margin-right:10px">
+                             <li><span>{{ user.username }}</span></li>
+                    </ul>
+		</div>
+	</nav>
+</div>

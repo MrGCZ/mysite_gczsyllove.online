@@ -1,0 +1,42 @@
+{% load staticfiles %}
+<div class="container">
+   <nav class="navbar navbar-default" role="navigation">
+      <div class="navbar-header">
+          <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static '/images/logo_blue.png' %}" width="160px"></a>
+      </div>
+      <div>
+         <ul class="nav navbar-nav" role="navigation">
+              <li><a href="{%url 'blog:blog_title'%}">ANNOUCEMENT</a></li>
+	       </ul>
+	       <ul class="nav navbar-nav navbar-right" style="margin-right:10px">
+               {% if user.is_authenticated %}
+               <li><a href="{% url 'article:article_titles' %}">ALL ARTICLES</a></li>
+               <li><a href="{% url 'truecalendar:show_calendar' %}">CALENDAR</a></li>
+               <li><a href="{% url 'article:article_column' %}">ARTICLE MANAGER</a></li>
+               <li class="dropdown">
+                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                     {{ user.username }}
+                     <b class="caret"></b>
+                 </a>
+                 <ul class="dropdown-menu">
+                      <li role="presentation">
+                          <a role="menuitem" tabindex="-1" href="{% url 'account:my_information' %}">My Information</a>
+                      </li>
+		                  <li role="presentation">
+			                     <a role="menuitem" tabindex="-1" href="{% url 'article:author_articles' user.username %}">My Articles</a>
+		                  </li>
+                      <li role="presentation">
+			                     <a role="menuitem" tabindex="-1" href="{% url 'account:password_change' %}">Change Passwords</a>
+		                  </li>
+                      <li role="presentation">
+                           <a role="menuitem" tabindex="-1" href="{% url 'account:user_logout' %}">Logout</a>
+                      </li>
+                  </ul>
+              </li>
+               {% else %}
+	             <li><a href="{% url 'account:user_login' %}">LOGIN</a></li>
+               {% endif %}
+	      </ul>
+      </div>
+    </nav>
+</div>

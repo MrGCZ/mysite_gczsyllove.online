@@ -1,0 +1,14 @@
+{% extends "calendar/base1.html" %}
+
+{% block content %}
+<div class="container jumbotron">
+<div class-"row">
+  <button onclick="window.location='{% url 'truecalendar:show_calendar' %}'" class="btn btn-outline-primary">Go Back</button>
+  <h1>Event : {{ calendarentry.name }}</h1>
+  <h5>Date to remember : {{ calendarentry.remarkdate }}</h5>
+  <h5>Importance Level : {{ calendarentry.importance }}</h5>
+  <p>Descriptions:{{ calendarentry.descriptions }}</p>
+  <p>Created time:{{ calendarentry.created }}</p>
+</div>
+</div>
+{% endblock %}

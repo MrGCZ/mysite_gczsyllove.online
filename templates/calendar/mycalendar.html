@@ -1,0 +1,19 @@
+{% extends "calendar/base1.html" %}
+{% block content %}
+<div class="container">
+  <br />
+  <div class="row">
+    <div class="col-lg-10">
+      <h1>AWESOME CALENDAR</h1>
+    </div>
+    <div class="col-lg-2">
+      <button onclick="window.location='{% url 'truecalendar:add' %}'" type="button" class="btn btn-success">Add Entry</button>
+    </div>
+  </div>
+  <div class="row">
+    {% for calendarentry in calendarentries %}
+      {% include 'calendar/calendarentry.html' %}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "calendar/base1_tdl.html" %}
+{% block content %}
+<div class="container">
+  <br />
+  <div class="row">
+    <div class="col-lg-10">
+      <h1>To do list</h1>
+    </div>
+  </div>
+  <div class="row">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Event</th>
+        <th scope="col">Deadline</th>
+        <th scope="col">Time left</th>
+        <th scope="col">Importance</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for calendarentry_tdl in calendarentries_tdl %}
+      <tr class="table-dark">
+        <th scope="row">{{ calendarentry_tdl.name }}</th>
+        <td>{{ calendarentry_tdl.remarkdate }}</td>
+        <td>{{ calendarentry_tdl.tdelta }}</td>
+        <td>{{ calendarentry_tdl.importance }}</td>
+        <td>
+          <button onclick="finishCalendarEntry_tdl(this,{{ calendarentry_tdl.id }})" class="btn btn-warning">Finish</button>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+  </table>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+{% endblock %}

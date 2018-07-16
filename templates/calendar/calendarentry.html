@@ -1,0 +1,20 @@
+<div class="card border-primary mb-3" style="max-width: 20rem;">
+  <div class="card-header"><h2>{{ calendarentry.name }}</h2></div>
+  <div class="card-body">
+  {% if calendarentry.mark %}
+    <h4 class="card-title">{{ calendarentry.tdelta }} days ago</h4>
+  {% else %}
+    <h4 class="card-title">{{ calendarentry.tdelta }} days left</h4>
+  {% endif %}
+  <p class="card-text">Importance Level:{{ calendarentry.importance }}</p>
+  <p class="card-text">
+    Descriptions : {{ calendarentry.descriptions|truncatechars:30 }}
+  </p>
+  <button onclick="window.location='{% url 'truecalendar:show_details' calendarentry.id %}'" class="btn btn-primary">Details</button>
+  {% if calendarentry.mark %}
+  {% else %}
+    <button onclick="finishCalendarEntry(this,{{ calendarentry.id }})" class="btn btn-warning">Finish</button>
+  {% endif %}
+  <button onclick="deleteCalendarEntry(this,{{ calendarentry.id }})" class="btn btn-danger">Delete</button>
+  </div>
+</div>
